@@ -1,8 +1,8 @@
-package kar.urals;
+package kar.urals.model;
 
 public class Board {
 
-    private static final String GAME_NAME = "XO";
+
 
     private Figure figure11 = new Figure(" ");
     private Figure figure12 = new Figure(" ");
@@ -14,9 +14,7 @@ public class Board {
     private Figure figure32 = new Figure(" ");
     private Figure figure33 = new Figure(" ");
 
-    public static void printGameName() {
-        System.out.println(GAME_NAME);
-    }
+
 
     public void printBoard() {
         System.out.printf("%s|%s|%s\n", figure11.getFigure(), figure12.getFigure(), figure13.getFigure());

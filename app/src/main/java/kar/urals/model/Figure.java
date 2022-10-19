@@ -1,4 +1,4 @@
-package kar.urals;
+package kar.urals.model;
 
 public class Figure {
      private String value;
