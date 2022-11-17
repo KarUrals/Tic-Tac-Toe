@@ -1,16 +1,16 @@
-package kar.urals.view;
-
-import kar.urals.controller.Game;
-
-public class AdvConsoleView extends ConsoleView{
-    public AdvConsoleView(Game game) {
-        super(game);
-    }
-
-    @Override
-    public void showGameName() {
-        System.out.println("***");
-        System.out.println(game.getGameName());
-        System.out.println("***");
-    }
-}
+//package kar.urals.view;
+//
+//import kar.urals.controller.GameController;
+//
+//public class AdvConsoleView extends ConsoleView{
+////    public AdvConsoleView(GameController game) {
+////        super(game);
+////    }
+////
+////    @Override
+////    public void showGameName() {
+////        System.out.println("***");
+////        System.out.println(gameController.getGameName());
+////        System.out.println("***");
+////    }
+//}
