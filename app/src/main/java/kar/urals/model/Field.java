@@ -2,6 +2,7 @@ package kar.urals.model;
 
 import kar.urals.exceptions.AlreadyOccupiedException;
 import kar.urals.exceptions.InvalidPointException;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.Point;
 
@@ -35,7 +36,7 @@ public class Field {
         field[point.x][point.y] = figure;
     }
 
-    private boolean checkPoint(Point point) {
+    private boolean checkPoint(@NotNull Point point) {
         return checkCoordinate(point.x) && checkCoordinate(point.y);
     }
 

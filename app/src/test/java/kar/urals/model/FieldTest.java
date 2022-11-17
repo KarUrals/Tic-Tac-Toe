@@ -1,5 +1,6 @@
 package kar.urals.model;
 
+import kar.urals.exceptions.AlreadyOccupiedException;
 import kar.urals.exceptions.InvalidPointException;
 import kar.urals.exceptions.XOException;
 import org.junit.jupiter.api.Test;
@@ -27,6 +28,31 @@ class FieldTest {
         final Figure actualFigure = field.getFigure(inputPoint);
 
         assertEquals(expectedFigure, actualFigure);
+    }
+
+    @Test
+    void testSetFigureWhenAlreadyOccupied() throws XOException {
+        final Field field = new Field();
+        final Point inputPoint = new Point(0, 0);
+        final Figure inputFigure = Figure.X;
+
+        field.setFigure(inputPoint, inputFigure);
+        try {
+            field.setFigure(inputPoint, inputFigure);
+            fail();
+        } catch (final AlreadyOccupiedException e) {}
+    }
+
+    @Test
+    void testSetFigureToIncorrectCoordinate() throws XOException {
+        final Field field = new Field();
+        final Point inputPoint = new Point(field.getSize() + 1, 0);
+        final Figure inputFigure = Figure.X;
+
+        try {
+            field.setFigure(inputPoint, inputFigure);
+            fail();
+        } catch (final InvalidPointException e) {}
     }
 
     @Test
