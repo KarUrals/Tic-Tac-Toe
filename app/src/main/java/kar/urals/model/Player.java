@@ -1,19 +1,20 @@
-//package kar.urals.model;
-//
-//public class Player {
-//    private final String name;
-//    private final String figure;
-//
-//    public Player(final String name, String figure) {
-//        this.name = name;
-//        this.figure = figure;
-//    }
-//
-//    public String getPlayerName() {
-//        return name;
-//    }
-//
-//    public String getPlayerFigure() {
-//        return figure;
-//    }
-//}
+package kar.urals.model;
+
+public class Player {
+    private final String name;
+    private final Figure figure;
+
+
+    public Player(final String name, final Figure figure) {
+        this.name = name;
+        this.figure = figure;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Figure getFigure() {
+        return figure;
+    }
+}
