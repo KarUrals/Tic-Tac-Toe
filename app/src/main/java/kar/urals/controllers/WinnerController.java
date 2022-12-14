@@ -29,13 +29,13 @@ public class WinnerController {
                     return field.getFigure(new Point(1, 1));
                 }
             }
-        } catch (InvalidPointException e) {
+        } catch (final InvalidPointException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    private boolean check(final Field field,
+    boolean check(final Field field,
                           final Point currentPoint,
                           final IPointGenerator pointGenerator) {
         final Figure currentFigure;
@@ -43,13 +43,14 @@ public class WinnerController {
         final Point nextPoint = pointGenerator.next(currentPoint);
         try {
             currentFigure = field.getFigure(currentPoint);
-            nextFigure = field.getFigure(nextPoint);
-        } catch (InvalidPointException e) {
-            return true;
-        }
 
-        if (currentFigure == null) {
-            return false;
+            if (currentFigure == null) {
+                return false;
+            }
+
+            nextFigure = field.getFigure(nextPoint);
+        } catch (final InvalidPointException e) {
+            return true;
         }
 
         if (currentFigure != nextFigure) {
