@@ -12,14 +12,14 @@ class FieldTest {
 
     @Test
     void testGetSize() {
-        final Field field = new Field();
+        final Field field = new Field(3);
 
         assertEquals(3, field.getSize());
     }
 
     @Test
     void testSetFigure() throws XOException {
-        final Field field = new Field();
+        final Field field = new Field(3);
         final Point inputPoint = new Point(0, 0);
         final Figure inputFigure = Figure.X;
         final Figure expectedFigure = inputFigure;
@@ -45,7 +45,7 @@ class FieldTest {
 
     @Test
     void testSetFigureToIncorrectCoordinate() throws XOException {
-        final Field field = new Field();
+        final Field field = new Field(3);
         final Point inputPoint = new Point(field.getSize() + 1, 0);
         final Figure inputFigure = Figure.X;
 
@@ -57,7 +57,7 @@ class FieldTest {
 
     @Test
     void testGetFigureWhenFigureIsNotSet() throws XOException {
-        final Field field = new Field();
+        final Field field = new Field(3);
         final Point inputPoint = new Point(0, 0);
 
         final Figure actualFigure = field.getFigure(inputPoint);
@@ -67,7 +67,7 @@ class FieldTest {
 
     @Test
     void testGetFigureWhenXIsLessThenZero() throws XOException {
-        final Field field = new Field();
+        final Field field = new Field(3);
         final Point inputPoint = new Point(-1, 0);
 
         try {
@@ -78,7 +78,7 @@ class FieldTest {
 
     @Test
     void testGetFigureWhenYIsLessThenZero() throws XOException {
-        final Field field = new Field();
+        final Field field = new Field(3);
         final Point inputPoint = new Point(0, -1);
 
         try {
@@ -89,7 +89,7 @@ class FieldTest {
 
     @Test
     void testGetFigureWhenXIsMoreThenSize() throws XOException {
-        final Field field = new Field();
+        final Field field = new Field(3);
         final Point inputPoint = new Point(field.getSize() + 1, 0);
 
         try {
@@ -100,7 +100,7 @@ class FieldTest {
 
     @Test
     void testGetFigureWhenYIsMoreThenSize() throws XOException {
-        final Field field = new Field();
+        final Field field = new Field(3);
         final Point inputPoint = new Point(0, field.getSize() + 1);
 
         try {
