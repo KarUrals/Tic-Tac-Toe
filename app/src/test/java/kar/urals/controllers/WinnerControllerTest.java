@@ -16,7 +16,7 @@ class WinnerControllerTest {
         final WinnerController winnerController = new WinnerController();
 
         for (int i = 0; i < 3; i++) {
-            final Field field = new Field(3);
+            final Field<Figure> field = new Field<>(3);
             field.setFigure(new Point(i, 0), Figure.X);
             field.setFigure(new Point(i, 1), Figure.X);
             field.setFigure(new Point(i, 2), Figure.X);
@@ -29,7 +29,7 @@ class WinnerControllerTest {
         final WinnerController winnerController = new WinnerController();
 
         for (int i = 0; i < 3; i++) {
-            final Field field = new Field(3);
+            final Field<Figure> field = new Field<>(3);
             field.setFigure(new Point(i, 0), Figure.X);
             field.setFigure(new Point(i, 1), Figure.X);
             field.setFigure(new Point(i, 2), Figure.O);
@@ -42,7 +42,7 @@ class WinnerControllerTest {
         final WinnerController winnerController = new WinnerController();
 
         for (int i = 0; i < 3; i++) {
-            final Field field = new Field(3);
+            final Field<Figure> field = new Field<>(3);
             field.setFigure(new Point(0, i), Figure.X);
             field.setFigure(new Point(1, i), Figure.X);
             field.setFigure(new Point(2, i), Figure.X);
@@ -55,7 +55,7 @@ class WinnerControllerTest {
         final WinnerController winnerController = new WinnerController();
 
         for (int i = 0; i < 3; i++) {
-            final Field field = new Field(3);
+            final Field<Figure> field = new Field<>(3);
             field.setFigure(new Point(0, i), Figure.X);
             field.setFigure(new Point(1, i), Figure.X);
             field.setFigure(new Point(2, i), Figure.O);
@@ -66,7 +66,7 @@ class WinnerControllerTest {
     @Test
     public void testGetWinnerWhenWinnerMainDiag() throws InvalidPointException {
         final WinnerController winnerController = new WinnerController();
-        final Field field = new Field(3);
+        final Field<Figure> field = new Field<>(3);
         field.setFigure(new Point(0, 0), Figure.X);
         field.setFigure(new Point(1, 1), Figure.X);
         field.setFigure(new Point(2, 2), Figure.X);
@@ -76,7 +76,7 @@ class WinnerControllerTest {
     @Test
     public void testGetWinnerWhenNoWinnerMainDiag() throws InvalidPointException {
         final WinnerController winnerController = new WinnerController();
-        final Field field = new Field(3);
+        final Field<Figure> field = new Field<>(3);
         field.setFigure(new Point(0, 0), Figure.X);
         field.setFigure(new Point(1, 1), Figure.X);
         field.setFigure(new Point(2, 2), Figure.O);
@@ -86,7 +86,7 @@ class WinnerControllerTest {
     @Test
     public void testGetWinnerWhenWinnerSecondDiag() throws InvalidPointException {
         final WinnerController winnerController = new WinnerController();
-        final Field field = new Field(3);
+        final Field<Figure> field = new Field<>(3);
         field.setFigure(new Point(2, 0), Figure.X);
         field.setFigure(new Point(1, 1), Figure.X);
         field.setFigure(new Point(0, 2), Figure.X);
@@ -96,7 +96,7 @@ class WinnerControllerTest {
     @Test
     public void testGetWinnerWhenNoWinnerSecondDiag() throws InvalidPointException {
         final WinnerController winnerController = new WinnerController();
-        final Field field = new Field(3);
+        final Field<Figure> field = new Field<>(3);
         field.setFigure(new Point(2, 0), Figure.X);
         field.setFigure(new Point(1, 1), Figure.X);
         field.setFigure(new Point(0, 2), Figure.O);

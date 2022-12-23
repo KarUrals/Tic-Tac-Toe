@@ -7,7 +7,7 @@ import kar.urals.model.Figure;
 import java.awt.*;
 
 public class WinnerController {
-    public Figure getWinner(final Field field) {
+    public Figure getWinner(final Field<Figure> field) {
         try {
             for (int i = 0; i < 3; i++) {
                 if (check(field, new Point(i, 0), p -> new Point(p.x, p.y + 1))) {
@@ -35,7 +35,7 @@ public class WinnerController {
         return null;
     }
 
-    boolean check(final Field field,
+    boolean check(final Field<Figure> field,
                           final Point currentPoint,
                           final IPointGenerator pointGenerator) {
         final Figure currentFigure;

@@ -9,7 +9,7 @@ import java.awt.Point;
 
 public class MoveController {
 
-    public void applyField(final Field field,
+    public void applyField(final Field<Figure> field,
                            final Point point,
                            final Figure figure) throws InvalidPointException, AlreadyOccupiedException {
         if (field.getFigure(point) != null) {

@@ -6,21 +6,21 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.Point;
 
-public class Field {
+public class Field<T> {
     public static final int MIN_COORDINATE = 0;
-    private final Figure[][] field;
+    private final T[][] field;
     private final int fieldSize;
 
     public Field(final int fieldSize) {
         this.fieldSize = fieldSize;
-        field = new Figure[fieldSize][fieldSize];
+        field = (T[][]) new Object[fieldSize][fieldSize];
     }
 
     public int getSize() {
         return fieldSize;
     }
 
-    public Figure getFigure(final Point point) throws InvalidPointException {
+    public T getFigure(final Point point) throws InvalidPointException {
         if (!checkPoint(point)) {
             throw new InvalidPointException();
         }
@@ -28,7 +28,7 @@ public class Field {
         return field[point.x][point.y];
     }
 
-    public void setFigure(final Point point, final Figure figure) throws InvalidPointException {
+    public void setFigure(final Point point, final T figure) throws InvalidPointException {
         if (!checkPoint(point)) {
             throw new InvalidPointException();
         }

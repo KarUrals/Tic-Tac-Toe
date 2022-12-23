@@ -1,68 +1,91 @@
-//package kar.urals.view;
-//
-//import kar.urals.controller.GameController;
-//import kar.urals.model.Player;
-//
-//import java.util.InputMismatchException;
-//import java.util.Scanner;
-//
-//public class ConsoleView {
-//
-////    protected final GameController gameController;
-////
-////    private static final Scanner IN = new Scanner(System.in);
-////
-////    public ConsoleView(final GameController gameController) {
-////        assert gameController != null;
-////        this.gameController = gameController;
-////    }
-////    public void showGameName() {
-////        System.out.println(gameController.getGameName());
-////    }
-////    public void showPlayersName() {
-////        System.out.println(gameController.getPlayers());
-////    }
-////    public void start() {
-////        System.out.println("Please input coordinates:");
-////        int x = getCoordinate("X");
-////        int y = getCoordinate("Y");
-////    }
-////    public void showPlayers(){
-////        for (Player player : gameController.getPlayers()) {
-////            System.out.println(player.getPlayerName());
-////        }
-////    }
-////
-////    public void showBoard() {
-////        for (int i = 0; i < 3; i++) {
-////            showBoardLine(i);
-////            showLine(12);
-////        }
-////    }
-////    private void showBoardLine(final int row) {
-////        for (int i = 0; i < 3; i++) {
-////            System.out.print(gameController.getBoard().getFigure(row,i));
-////        }
-////        System.out.println();
-////    }
-////    private void showLine(final int size) {
-////        for (int i = 0; i < size; i++) {
-////            System.out.print("~");
-////        }
-////        System.out.println();
-////    }
-////    private int getCoordinate(final String coordinateName) {
-////        int counter = 0;
-////        do {
-////            System.out.print(String.format("Input the coordinate %s: ", coordinateName));
-////            try {
-////                final Scanner in = new Scanner(System.in);
-////                return in.nextInt();
-////            } catch (final InputMismatchException e) {
-////                System.out.println("Coordinate is incorrect");
-////                counter++;
-////            }
-////        } while (counter < 3);
-////        return -1;
-////    }
-//}
+package kar.urals.view;
+
+import kar.urals.controllers.CurrentMoveController;
+import kar.urals.controllers.MoveController;
+import kar.urals.controllers.WinnerController;
+import kar.urals.exceptions.AlreadyOccupiedException;
+import kar.urals.exceptions.InvalidPointException;
+import kar.urals.model.Field;
+import kar.urals.model.Figure;
+import kar.urals.model.Game;
+
+import java.awt.*;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class ConsoleView {
+    private final CurrentMoveController currentMoveController = new CurrentMoveController();
+    private final WinnerController winnerController = new WinnerController();
+    private final MoveController moveController = new MoveController();
+
+    public void show(final Game<Figure> game) {
+        System.out.format("Game name: %s\n", game.getName());
+        final Field<Figure> field = game.getField();
+        for (int x = 0; x < field.getSize(); x++) {
+            if (x != 0) {
+                printSeparator();
+            }
+            printLine(field, x);
+        }
+    }
+
+    public boolean move(final Game<Figure> game) {
+        final Field<Figure> field = game.getField();
+        final Figure winner = winnerController.getWinner(field);
+        if (winner != null) {
+            System.out.format("Winner is: %s\n", winner);
+            return false;
+        }
+
+        final Figure currentFigure = currentMoveController.currentMove(field);
+        if (currentFigure == null) {
+            System.out.println("No winner and no moves left!");
+            return false;
+        }
+
+        System.out.format("Please enter move point for: %s\n", currentFigure);
+        final Point point = askPoint();
+        try {
+            moveController.applyField(field, point, currentFigure);
+        } catch (final InvalidPointException | AlreadyOccupiedException e) {
+            System.out.println("Point is invalid!");
+        }
+        return true;
+    }
+
+    private Point askPoint() {
+        return new Point(askCoordinate("X") - 1, askCoordinate("Y") - 1);
+    }
+    private int askCoordinate(final String coordinateName) {
+        System.out.format("Please input %s: ", coordinateName);
+        final Scanner in = new Scanner(System.in);
+        try {
+            return in.nextInt();
+        } catch (final InputMismatchException e) {
+            System.out.println("0_0 olololo!");
+            return askCoordinate(coordinateName);
+        }
+
+    }
+    private void printLine(final Field<Figure> field, final int x) {
+        for (int y = 0; y < field.getSize(); y++) {
+            if (y != 0) {
+                System.out.print("|");
+            }
+            System.out.print(" ");
+            final Figure figure;
+            try {
+                figure = field.getFigure(new Point(y, x));
+            } catch (InvalidPointException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.print(figure != null ? figure : " ");
+            System.out.print(" ");
+        }
+        System.out.println();
+    }
+
+    private void printSeparator() {
+        System.out.println("~~~~~~~~~~~");
+    }
+}

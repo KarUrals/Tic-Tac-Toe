@@ -7,7 +7,7 @@ import kar.urals.model.Figure;
 import java.awt.*;
 
 public class CurrentMoveController {
-    public Figure currentMove(final Field field) {
+    public Figure currentMove(final Field<Figure> field) {
         int countFigures = 0;
         for (int x = 0; x < field.getSize(); x++) {
             countFigures += countFiguresInTheRow(field, x);
@@ -23,7 +23,7 @@ public class CurrentMoveController {
         return Figure.O;
     }
 
-    private int countFiguresInTheRow(final Field field, final  int row) {
+    private int countFiguresInTheRow(final Field<Figure> field, final  int row) {
         int countFigures = 0;
         for (int x = 0; x < field.getSize(); x++) {
             try {
